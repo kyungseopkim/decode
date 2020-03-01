@@ -4,6 +4,7 @@ import (
 	"github.com/pierrec/lz4"
 	"encoding/binary"
 	"errors"
+    "log"
 )
 
 type DataReader struct {

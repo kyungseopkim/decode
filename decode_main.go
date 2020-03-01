@@ -35,7 +35,7 @@ func decodePayload(dbc *Messages, payload []byte) []MessageSignal {
 	if content != nil {
 		if message, err := NewMessageBody(content); err == nil {
 			decoder := NewDecoder(dbc, message)
-			return decoder.decode()
+			return decoder.Decode()
 		}
 	}
 	return make([]MessageSignal,0)
