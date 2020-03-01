@@ -1,6 +1,7 @@
 package decode
 
 import (
+	"github.com/pierrec/lz4"
 	"encoding/binary"
 	"errors"
 )
@@ -16,6 +17,16 @@ var IndexError = errors.New("index out of range")
 func NewDataReader(data []byte, endian binary.ByteOrder) *DataReader  {
 	r := DataReader{ data: data, pos: 0, endian: endian }
 	return &r
+}
+
+func Decompress(payload []byte) []byte {
+	dst := make([]byte, 10*1024*1024)
+	size, err := lz4.UncompressBlock(payload, dst)
+	if err != nil {
+		log.Fatal(err)
+		return nil
+	}
+	return dst[:size]
 }
 
 func (reader DataReader) checkRange(length int32)  (bool, error) {

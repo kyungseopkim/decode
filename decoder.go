@@ -4,7 +4,7 @@ import (
 	"log"
 )
 
-// Decoder is a type 
+// Decoder is a type
 type Decoder struct {
 	Dbc map[int32]Message
 	Msg *MessageBody
@@ -15,7 +15,8 @@ func NewDecoder(dbc *Messages, msg *MessageBody) *Decoder {
 	return &Decoder{Dbc: dbc.GetLookup(), Msg: msg}
 }
 
-func (decoder Decoder) decode() []MessageSignal {
+// Decode return Signals
+func (decoder Decoder) Decode() []MessageSignal {
 	ret := make([]MessageSignal, 0)
 	vin := decoder.Msg.Vin
 	for _, packet := range decoder.Msg.Packet {
